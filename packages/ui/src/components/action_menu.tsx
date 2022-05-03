@@ -24,6 +24,7 @@ import {
 import React, { useCallback } from "react";
 import { useFileStorage } from "../hooks";
 import { useDownload } from "../hooks/useDownload";
+import MailIcon from '@mui/icons-material/Mail';
 
 interface Props {
   row: GridRenderCellParams;
@@ -64,14 +65,18 @@ export default function ActionMenu({ row }: Props) {
         <MoreVert />
       </IconButton>
       <Menu {...bindMenu(popupState)}>
+        <MenuItem>
+           <MailIcon sx={{ fontSize: 20 }}/>Send Email
+        </MenuItem>
         <MenuItem
           onClick={() => {
             popupState.close();
             setFileDiloagOpen(true);
           }}
         >
-          View FID
+          View Encrypted FID
         </MenuItem>
+
         <MenuItem
           onClick={async () => {
             popupState.close();

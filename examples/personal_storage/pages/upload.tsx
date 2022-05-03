@@ -10,7 +10,9 @@ import {
   Typography,
   FormControl,
   TextField,
-  InputLabel
+  InputLabel,
+  BottomNavigation,
+  BottomNavigationAction
 } from "@mui/material";
 import moment from "moment";
 import { GetServerSideProps } from "next";
@@ -20,6 +22,12 @@ import React from "react";
 import { FileTable, useFileStorage, useUpload } from "ui";
 import { useDownloadByFid } from "ui";
 import { Config } from "../configs/config";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import RestoreIcon from '@mui/icons-material/Restore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import SubwayIcon from '@mui/icons-material/Subway';
 
 interface Props {
   page: number;
@@ -48,26 +56,29 @@ export default function Upload({ page }: Props) {
   const submitForm = (event: React.FormEvent<HTMLFormElement>) =>
   {
     event.preventDefault();
-    console.log(FID);
-    alert(FID);
+    // console.log(FID);
+    // alert(FID);
     download_by_fid(FID, "download.txt");
     
   };
   return (
     <Stack alignItems={"center"} width="100vw" spacing={2}>
-            <div style={{ height: 120 }} />
+          <SubwayIcon sx={{ fontSize:60 }} />
+            <div style={{ height: 80 }} />
 
             <Card variant="outlined" style={{ width }}>
         <CardContent>
+          <CloudDownloadIcon fontSize="large"/>
           <Stack direction={"row"} justifyContent={"space-between"}>
             <Stack>
               <Stack direction={"row"} alignItems="center">
                 <form onSubmit={submitForm} >
                     <TextField 
+                      fullWidth
                       id="standard-basic" 
-                      label="FileID" 
+                      label="Enter Encrypted FileID" 
                       variant="standard" 
-                      style={{ width: 1050 }}
+                      style={{ width: 1300 }}
                       value={FID}
                       onChange={e => setFID(e.target.value)} />
                     <Button type="submit">Download</Button>
@@ -85,7 +96,7 @@ export default function Upload({ page }: Props) {
         <CardContent>
           <Stack direction={"row"} justifyContent={"space-between"}>
             <Stack>
-              <Typography>Upload</Typography>
+              <CloudUploadIcon fontSize="large"/>
               <Stack direction={"row"} alignItems="center">
                 <Typography fontWeight={"bold"}>
                   {file?.name ?? "No file selected"}
@@ -97,7 +108,7 @@ export default function Upload({ page }: Props) {
                       loadingPosition="start"
                       startIcon={<Done color="success" />}
                       onClick={async () => {
-                        window.alert("Group " + groupid.toString() + " has permissions of this file.");
+                        window.alert("Group " + groupid.toString() + " has permitions of this file.");
                         await upload(groupid);
                       }}
                     />
@@ -114,14 +125,21 @@ export default function Upload({ page }: Props) {
                 </Collapse>
               </Stack>
             </Stack>
+            {/* <TextField 
+                      id="standard-basic" 
+                      label="Permission Group ID"  
+                      variant="standard" 
+                      style={{ width: 150 }}
+                      onChange={e => setGroupid(parseInt(e.target.value))} /> */}
+
+            <label htmlFor="icon-button-file">
             <TextField 
                       id="standard-basic" 
-                      label="Permission Group" 
+                      label="Permission Group ID"  
                       variant="standard" 
                       style={{ width: 150 }}
                       onChange={e => setGroupid(parseInt(e.target.value))} />
 
-            <label htmlFor="icon-button-file">
               <Input
                 accept="*/*"
                 id="icon-button-file"
@@ -161,7 +179,18 @@ export default function Upload({ page }: Props) {
           router.push(`/upload?page=${page}`);
         }}
       />
+      <BottomNavigation
+          showLabels
+          value={value}
+        >
+          <BottomNavigationAction label="Recents" icon={<RestoreIcon sx={{ fontSize:30 }} color="action"/>} />
+          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon sx={{ fontSize:30 }} color="action"/>} />
+          <BottomNavigationAction label="Notification" icon={<NotificationsNoneIcon sx={{ fontSize:30 }} color="action"/>} />
+        </BottomNavigation>
+              
+
     </Stack>
+ 
   );
 }
 

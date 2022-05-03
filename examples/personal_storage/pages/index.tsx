@@ -5,6 +5,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { AppTitle } from "ui";
 import { ArrowCircleRight, ArrowRight } from "@mui/icons-material";
+import SubwayIcon from '@mui/icons-material/Subway';
 import qs from "query-string";
 
 const Home: NextPage = () => {
@@ -22,10 +23,12 @@ const Home: NextPage = () => {
 
   return (
     <Stack alignItems={"center"}>
+           
+      <SubwayIcon sx={{ fontSize:60 }}/>
       <AppTitle
-        title={"Cloud Storage Demo"}
+        title={"File Train"} 
         descriptions={[
-          "This is a demo of a cloud storage service, you can use it to store files and download them at any time.",
+          "A cloud storage service that allows enterprises to share files among their employees with permission control",
         ]}
         isLoading={loading}
         walletAddress={value}
@@ -40,7 +43,7 @@ const Home: NextPage = () => {
         }}
         onConnectMetaMaskClick={async () => await connect()}
         onTextEnter={(v) => setValue(v)}
-        metamaskOnly={true}
+        metamaskOnly={false}
       />
     </Stack>
   );
