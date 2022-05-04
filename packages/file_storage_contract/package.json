@@ -37,7 +37,7 @@
     "typescript": "^4.6.3"
   },
   "scripts": {
-    "postinstall": "npm run build",
+    "postinstall": "yarn build",
     "build": "hardhat compile && tsc",
     "test": "hardhat test",
     "deploy": "hardhat run scripts/index.ts --network testnet"
