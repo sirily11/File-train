@@ -40,15 +40,15 @@ const Input = styled("input")({
 
 const width = "80vw";
 
-export default function Upload({ page }: Props) {
+export default function Upload({  }: Props) {
   const { status, connect, account, chainId, ethereum } = useMetaMask();
 
   const { download_by_fid } = useDownloadByFid();
   const [FID, setFID] = React.useState<string>("");
   const [groupid,setGroupid] = React.useState<number>(1);
   const { files } = useFileStorage({
-    start: (page - 1) * Config.defaultNumberPerPage,
-    end: page * Config.defaultNumberPerPage,
+    start: (1 - 1) * Config.defaultNumberPerPage,
+    end: 1 * Config.defaultNumberPerPage,
   });
   const { file, setFile, upload, isUploading } = useUpload({
     days: Config.defaultStoredDuration,
@@ -165,7 +165,7 @@ export default function Upload({ page }: Props) {
       <FileTable
         rows={
           files?.files.map((f: any, index: number) => ({
-            id: (page - 1) * Config.defaultNumberPerPage + index,
+            id: (1 - 1) * Config.defaultNumberPerPage + index,
             fid: f.fileId,
             type: f.fileType,
             name: f.fileName,
@@ -178,7 +178,7 @@ export default function Upload({ page }: Props) {
         numPages={Math.ceil(
           ((files?.count as number) ?? 1) / Config.defaultNumberPerPage
         )}
-        currentPage={page}
+        currentPage={1}
         onPageChange={(page: number) => {
           router.push(`/upload?page=${page}`);
         }}
@@ -198,12 +198,12 @@ export default function Upload({ page }: Props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
-  const page = parseInt((ctx.query.page as string) || "1");
+// export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
+//   const page = parseInt((ctx.query.page as string) || "1");
 
-  return {
-    props: {
-      page,
-    },
-  };
-};
+//   return {
+//     props: {
+//       page,
+//     },
+//   };
+// };
