@@ -62,7 +62,7 @@ export default function Upload({ page }: Props) {
     // console.log(FID);
     // alert(FID);
     download_by_fid(FID, "download.txt");
-    
+
   };
   return (
     <Stack alignItems={"center"} width="100vw" spacing={2}>
@@ -74,15 +74,14 @@ export default function Upload({ page }: Props) {
         <CardContent>
           <CloudDownloadIcon fontSize="large"/>
           <Stack direction={"row"} justifyContent={"space-between"}>
-            <Stack>
-              <Stack direction={"row"} alignItems="center">
-                <form onSubmit={submitForm} >
-                    <TextField 
+            <Stack style={{width: "100%"}}>
+              <Stack direction={"row"} alignItems="center" style={{width: "100%"}}>
+                <form onSubmit={submitForm} style={{width: "100%"}} >
+                    <TextField
                       fullWidth
-                      id="standard-basic" 
-                      label="Enter Encrypted FileID" 
-                      variant="standard" 
-                      style={{ width: 1300 }}
+                      id="standard-basic"
+                      label="Enter Encrypted FileID"
+                      variant="standard"
                       value={FID}
                       onChange={e => setFID(e.target.value)} />
                     <Button type="submit">Download</Button>
@@ -90,7 +89,7 @@ export default function Upload({ page }: Props) {
 
               </Stack>
             </Stack>
-           
+
           </Stack>
         </CardContent>
       </Card>
@@ -129,18 +128,18 @@ export default function Upload({ page }: Props) {
                 </Collapse>
               </Stack>
             </Stack>
-            {/* <TextField 
-                      id="standard-basic" 
-                      label="Permission Group ID"  
-                      variant="standard" 
+            {/* <TextField
+                      id="standard-basic"
+                      label="Permission Group ID"
+                      variant="standard"
                       style={{ width: 150 }}
                       onChange={e => setGroupid(parseInt(e.target.value))} /> */}
 
             <label htmlFor="icon-button-file">
-            <TextField 
-                      id="standard-basic" 
-                      label="Permission Group ID"  
-                      variant="standard" 
+            <TextField
+                      id="standard-basic"
+                      label="Permission Group ID"
+                      variant="standard"
                       style={{ width: 150 }}
                       onChange={e => setGroupid(parseInt(e.target.value))} />
 
@@ -156,7 +155,7 @@ export default function Upload({ page }: Props) {
                   }
                 }}
               />
-              
+
               <Button component="span">Upload</Button>
             </label>
           </Stack>
@@ -191,10 +190,10 @@ export default function Upload({ page }: Props) {
           <BottomNavigationAction label="Favorites" icon={<FavoriteIcon sx={{ fontSize:30 }} color="action"/>} />
           <BottomNavigationAction label="Notification" icon={<NotificationsNoneIcon sx={{ fontSize:30 }} color="action"/>} />
         </BottomNavigation>
-              
+
 
     </Stack>
- 
+
   );
 }
 
