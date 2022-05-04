@@ -16,10 +16,9 @@ export function useUpload({ days }: { days: number }) {
   const [isUploading, setIsUploading] = React.useState(false);
   const { provider } = useFileStorage({  });
 
-
-
-  let group: string[][] = [['0xfc0429c9cc6493735f0015a73272f128ff43f375'], ['0x157150a7aa199472ea6d803ac91d3edd30a8e659'],['0x157150a7aa199472ea6d803ac91d3edd30a8e659','0xfc0429c9cc6493735f0015a73272f128ff43f375']];
-
+  let group: string[][] = [['0x930cf3c4d11be05fdff0a137e16d62ad5beec286'], ['0x157150a7aa199472ea6d803ac91d3edd30a8e659'] ,['0x157150a7aa199472ea6d803ac91d3edd30a8e659','0x930cf3c4d11be05fdff0a137e16d62ad5beec286','0x6b50b4468488dff29979bef9a7af145d6648a7e1'], ];
+  // let group: string[][] = [['0xfc0429c9cc6493735f0015a73272f128ff43f375'], ['0x157150a7aa199472ea6d803ac91d3edd30a8e659'] ,['0x157150a7aa199472ea6d803ac91d3edd30a8e659','0xfc0429c9cc6493735f0015a73272f128ff43f375','0x6b50b4468488dff29979bef9a7af145d6648a7e1'], ];
+  
   const upload = useCallback(async (groupid:number) => {
     if (file && provider) {
       setIsUploading(true);
@@ -42,7 +41,9 @@ export function useUpload({ days }: { days: number }) {
           fileOwner: provider.address,
           fileCreated: BigNumber.from(moment().valueOf()).toString(),
         };
-
+        console.log(storageFile);
+        // encrypt
+        // const EFID = []
         const tx = await provider.addFile(storageFile,group[groupid-1]);
         await tx.wait();
         setFileId(encrypted);

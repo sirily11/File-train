@@ -19,7 +19,7 @@ export  function useDownloadByFid() {
         // console.log("Check permission: ", isValid);
         // window.alert(decrypt(k1.toHex(), encrypt(k1.publicKey.toHex(), data)).toString()
         // );
-        window.alert(account);
+        // window.alert(account);
         if(isValid.length != 0){
           try {
             const file = new BrowserFile(process.env.NEXT_PUBLIC_FILE_URL!);
