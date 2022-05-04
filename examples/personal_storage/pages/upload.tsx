@@ -28,6 +28,7 @@ import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SubwayIcon from '@mui/icons-material/Subway';
+import { useMetaMask } from "metamask-react";
 
 interface Props {
   page: number;
@@ -40,6 +41,8 @@ const Input = styled("input")({
 const width = "80vw";
 
 export default function Upload({ page }: Props) {
+  const { status, connect, account, chainId, ethereum } = useMetaMask();
+
   const { download_by_fid } = useDownloadByFid();
   const [FID, setFID] = React.useState<string>("");
   const [groupid,setGroupid] = React.useState<number>(1);
@@ -64,6 +67,7 @@ export default function Upload({ page }: Props) {
   return (
     <Stack alignItems={"center"} width="100vw" spacing={2}>
           <SubwayIcon sx={{ fontSize:60 }} />
+          <Button variant="outlined">Your account: {account}</Button>
             <div style={{ height: 80 }} />
 
             <Card variant="outlined" style={{ width }}>
