@@ -1,32 +1,35 @@
+import { useContext, useEffect, useState } from "react";
 import { Stack } from "@mui/material";
 import { useMetaMask } from "metamask-react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import { ETDContext } from "../models/etd_context";
 import { AppTitle } from "ui";
 import { ArrowCircleRight, ArrowRight } from "@mui/icons-material";
+import SubwayIcon from '@mui/icons-material/Subway';
 import qs from "query-string";
 
 const Home: NextPage = () => {
-  const { status, connect, account, chainId, ethereum } = useMetaMask();
   const [loading, setLoading] = useState(false);
+  const { status, connect, account, chainId, ethereum } = useMetaMask();
   const [value, setValue] = useState("");
-  const { setWalletAddress } = useContext(ETDContext);
 
   const router = useRouter();
 
   useEffect(() => {
     if (status === "connected") {
       setValue(account);
-      setWalletAddress(account);
     }
   }, [status, account]);
 
   return (
     <Stack alignItems={"center"}>
+           
+      <SubwayIcon sx={{ fontSize:60 }}/>
       <AppTitle
-        title={"File Upload Demo"}
+        title={"File Train"} 
+        descriptions={[
+          "A cloud storage service that allows enterprises to share files among their employees with permission control",
+        ]}
         isLoading={loading}
         walletAddress={value}
         isConnectingMetaMask={status === "connecting"}
@@ -35,14 +38,12 @@ const Home: NextPage = () => {
         actionText={"Next Page"}
         onClickAction={async () => {
           setLoading(true);
-          const query = qs.stringify({
-            walletAddress: value,
-          });
-          await router.push("/upload" + "?" + query);
+          await router.push("/upload");
           setLoading(false);
         }}
         onConnectMetaMaskClick={async () => await connect()}
         onTextEnter={(v) => setValue(v)}
+        metamaskOnly={false}
       />
     </Stack>
   );

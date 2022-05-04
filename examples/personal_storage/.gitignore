@@ -35,3 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 files/*
 !/files/readme.md
+artifacts
+cache
